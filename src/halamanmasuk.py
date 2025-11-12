@@ -102,6 +102,7 @@ def login():
         else:
             print("Password salah")
             time.sleep(2)
+            return None
     except (KeyboardInterrupt, EOFError):
         print("Bearlih ke halaman masuk")
         time.sleep(2)
