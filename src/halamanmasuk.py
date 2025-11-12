@@ -70,5 +70,39 @@ def register():
 
 def login():
     print("=== Login ====")
+    try:
+        username = input("Username\t\t:")
+        password = getpass.getpass("Password\t\t:")
+        if " " in username:
+            print("Username tidak boleh mengandung spasi")
+            time.sleep(2)
+            return None
+        if " " in password:
+            print("Password tidak boleh mengandung spasi")
+            time.sleep(2)
+            return None
 
+        if username == "":
+            print("Username tidak boleh kosong")
+            return None
+        if password == "":
+            print("Password tidak boleh kosong")
+            return None
+        user_data = users.get(user.username == username)
 
+        if not user_data:
+            print("Username tidak ditemukan")
+            time.sleep(2)
+            return None
+        
+        if user_data['password'] == password:
+            print("Berhasil Login")
+            time.sleep(3)
+            return user_data
+        else:
+            print("Password salah")
+            time.sleep(2)
+    except (KeyboardInterrupt, EOFError):
+        print("Bearlih ke halaman masuk")
+        time.sleep(2)
+        return None
