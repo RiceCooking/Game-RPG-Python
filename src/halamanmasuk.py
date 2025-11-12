@@ -107,3 +107,8 @@ def login():
         print("Bearlih ke halaman masuk")
         time.sleep(2)
         return None
+    
+def keluar_program():
+    print("Keluar dari Program")
+    time.sleep(3)
+    return False
