@@ -9,6 +9,11 @@ players = db.table('players')
 user = Query()
 player = Query()
 
+def halaman_masuk():
+    #TODO
+    pass
+
+
 def register():
     print("=== Register ===")
     try:
