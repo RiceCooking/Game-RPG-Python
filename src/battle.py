@@ -122,6 +122,3 @@ def battle(username):
 
         else:
             print("Pilihan tidak valid.")
-
-
-battle("furia")
