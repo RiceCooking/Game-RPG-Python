@@ -1,6 +1,7 @@
 from tinydb import TinyDB, Query
 import time
-import getpass
+import os
+import sys
 
 DB_PATH = 'data/rpg_game_db.json' 
 db = TinyDB(DB_PATH)
@@ -13,13 +14,24 @@ def halaman_masuk():
     #TODO
     pass
 
+def loading(text="Loading", durasi=5):
+    print(text, end="")
+    for i in range(durasi):
+        time.sleep(1)
+        sys.stdout.write(".")
+        sys.stdout.flush()
+    print(" Selesai")
+
+
+def clear():
+    os.system("cls || clear")
 
 def register():
     print("=== Register ===")
     try:
         username = input("Username\t\t:")
-        password = getpass.getpass("Password\t\t:")
-        konfpass = getpass.getpass("Konfirmasi Password\t:")
+        password = input("Password\t\t:")
+        konfpass = input("Konfirmasi Password\t:")
 
         if " " in username:
             print("Username tidak boleh mengandung spasi")
@@ -63,8 +75,8 @@ def register():
             'inventory' : [],
             'senjata_aktif' : None
         })
-        print("Berhasil Registrasi\n Pengguna baru mendapatkan 150 koin.")
-        time.sleep(3)
+        print("Pengguna baru mendapatkan 150 koin.")
+        loading("Proses Register", 3)
 
     except (KeyboardInterrupt, EOFError):
         print("Bearlih ke halaman masuk")
