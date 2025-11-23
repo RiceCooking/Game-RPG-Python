@@ -30,20 +30,24 @@ def register():
     print("=== Register ===")
     try:
         username = input("Username\t\t:")
+        if users.search(user.username == username):
+            print("Username tidak tersedia")
+            time.sleep(2)
+            return
         password = input("Password\t\t:")
         konfpass = input("Konfirmasi Password\t:")
 
         if " " in username:
             print("Username tidak boleh mengandung spasi")
-            time.sleep(2)
+            time.sleep(3)
             return
         if " " in password:
             print("Password tidak boleh mengandung spasi")
-            time.sleep(2)
+            time.sleep(3)
             return     
         if password != konfpass:
             print("Password tidak sesuai")
-            time.sleep(2)
+            time.sleep(3)
             return
         if len(username) < 3:
             print("Username minimal 3 karakter")
@@ -53,10 +57,7 @@ def register():
             print("Password minimal 3 karakter")
             time.sleep(2)
             return
-        if users.search(user.username == username):
-            print("Username tidak tersedia")
-            time.sleep(2)
-            return
+
         
         id = users.insert({
             'username' : username,
@@ -65,9 +66,10 @@ def register():
 
         players.insert({
             'user_id' : id,
+            'role' : 'user',
             'karakter' : None,
             'class' : None,
-            'level' : 0,
+            'level' : 1,
             'exp' : 0,
             'hp' : 0,
             'attack' : 0,
@@ -83,13 +85,11 @@ def register():
         time.sleep(2)
         return
 
-        
-
 def login():
     print("=== Login ====")
     try:
         username = input("Username\t\t:")
-        password = getpass.getpass("Password\t\t:")
+        password = input("Password\t\t:")
         if " " in username:
             print("Username tidak boleh mengandung spasi")
             time.sleep(2)
@@ -113,8 +113,7 @@ def login():
             return None
         
         if user_data['password'] == password:
-            print("Berhasil Login")
-            time.sleep(3)
+            loading("Proses Login", 3)
             return user_data
         else:
             print("Password salah")
@@ -126,6 +125,5 @@ def login():
         return None
     
 def keluar_program():
-    print("Keluar dari Program")
-    time.sleep(3)
+    loading("Keluar dari Program", 3)
     return False
