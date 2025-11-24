@@ -2,6 +2,7 @@ from tinydb import TinyDB, Query
 import time
 import os
 import sys
+import inquirer
 
 DB_PATH = 'data/rpg_game_db.json' 
 db = TinyDB(DB_PATH)
@@ -11,8 +12,46 @@ user = Query()
 player = Query()
 
 def halaman_masuk():
-    #TODO
-    pass
+    clear()
+    jawaban = None
+    while True:
+        try:
+            questions = [
+            inquirer.List('opsi',
+                          message = "=== Halaman masuk ===",
+                          choices=[
+                              'Register',
+                              'Login',  
+                              'Keluar',
+                              ]),
+        ]
+            answer = inquirer.prompt(questions)
+
+
+            if not answer:
+                raise KeyboardInterrupt
+
+            jawaban = answer
+            break
+
+        except (KeyboardInterrupt, EOFError):
+            loading("Pilihlah berdasarkan opsi", 2)
+            clear()
+
+    opsi = jawaban['opsi']
+
+    if opsi == 'Register':
+        clear()
+        register()
+        return None
+
+    elif opsi == 'Login':
+        clear()
+        return login()
+
+    elif opsi == 'Keluar':
+        clear()
+        return False
 
 def loading(text="Loading", durasi=5):
     print(text, end="")
