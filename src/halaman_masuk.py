@@ -51,6 +51,7 @@ def halaman_masuk():
 
     elif opsi == 'Keluar':
         clear()
+        loading("Keluar dari Program", 3)
         return False
 
 def loading(text="Loading", durasi=5):
@@ -163,6 +164,3 @@ def login():
         time.sleep(2)
         return None
     
-def keluar_program():
-    loading("Keluar dari Program", 3)
-    return False
