@@ -10,6 +10,7 @@ users = db.table('users')
 players = db.table('players')
 user = Query()
 player = Query()
+q = Query()
 
 def halaman_masuk():
     clear()
