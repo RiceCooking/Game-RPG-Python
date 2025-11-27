@@ -269,10 +269,10 @@ def ganti_senjata(user_id_login):
             choices=[f"{s} [+{SENJATA_DATA[s]['attack_bonus']} Attack]" for s in valid_senjata]
         )
     ]
-    ans = inquirer.prompt(menu)
+    jawaban = inquirer.prompt(menu)
 
     # Ambil nama senjata tanpa text bonus
-    senjata_baru = ans['pilih'].split(' [')[0]
+    senjata_baru = jawaban['pilih'].split(' [')[0] #split(' [')[0] = hapus bagian info attack, ambil nama senjatanya saja.
 
     # Update senjata aktif
     players.update({'senjata_aktif': senjata_baru}, player.user_id == user_id_login)
