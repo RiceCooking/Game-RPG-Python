@@ -25,21 +25,21 @@ def karakter(user_id_login):
                 ]
             )
         ]
-        ans = inquirer.prompt(menu)
+        jawaban = inquirer.prompt(menu)
 
-        if not ans:
+        if not jawaban:
             return  # jika user keluar dari menu secara paksa
 
         # Ke halaman statistik karakter
-        if ans['opsi'] == "Statistik":
+        if jawaban['opsi'] == "Statistik":
             statistik(user_id_login)
 
         # Ke menu inventory
-        elif ans['opsi'] == "Inventory":
+        elif jawaban['opsi'] == "Inventory":
             inventory(user_id_login)
 
         # Kembali ke menu sebelumnya
-        elif ans['opsi'] == "Kembali":
+        elif jawaban['opsi'] == "Kembali":
             break
 
 
@@ -120,19 +120,19 @@ def inventory(user_id_login):
                 ]
             )
         ]
-        ans = inquirer.prompt(menu)
+        jawaban = inquirer.prompt(menu)
 
         # Arahkan sesuai pilihan
-        if ans['opsi'] == "Lihat Detail Senjata":
+        if jawaban['opsi'] == "Lihat Detail Senjata":
             lihat_detail_senjata(user_id_login)
 
-        elif ans['opsi'] == "Hapus Senjata":
+        elif jawaban['opsi'] == "Hapus Senjata":
             hapus_senjata(user_id_login)
 
-        elif ans['opsi'] == "Ganti Senjata Aktif":
+        elif jawaban['opsi'] == "Ganti Senjata Aktif":
             ganti_senjata(user_id_login)
 
-        elif ans['opsi'] == "Kembali":
+        elif jawaban['opsi'] == "Kembali":
             break
 
 
@@ -166,9 +166,9 @@ def lihat_detail_senjata(user_id_login):
             choices=valid_senjata
         )
     ]
-    ans = inquirer.prompt(menu)
+    jawaban = inquirer.prompt(menu)
 
-    senjata = ans['pilih']
+    senjata = jawaban['pilih']
     stats = SENJATA_DATA[senjata]
 
     # Menampilkan detail lengkap
@@ -225,10 +225,10 @@ def hapus_senjata(user_id_login):
             choices=[f"{s} [{SENJATA_DATA[s]['rarity']}]" for s in valid_senjata]
         )
     ]
-    ans = inquirer.prompt(menu)
+    jawaban = inquirer.prompt(menu)
 
     # Mengambil nama senjata sebelum tanda '['
-    senjata_nama = ans['hapus'].split(' [')[0]
+    senjata_nama = jawaban['hapus'].split(' [')[0]
 
     # Tidak boleh menghapus senjata aktif
     if senjata_nama == data['senjata_aktif']:
