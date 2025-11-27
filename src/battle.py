@@ -127,7 +127,7 @@ def battle(user_id_login):
         menu = [
             inquirer.List(
                 'opsi',
-                message="Pilih boss:",
+                message="Pilih boss",
                 choices=[
                     'Boss lvl 1 (Goblin King) - 50 HP',
                     'Boss lvl 2 (Orc Warlord) - 75 HP',
