@@ -66,7 +66,7 @@ def menu_admin(user_id_login):
         
         menu = [
             inquirer.List('opsi',
-                          message="Pilih Tindakan:",
+                          message="Pilih Tindakan",
                           choices=[
                               'Hapus Data Player',
                               'Keluar'
@@ -75,6 +75,7 @@ def menu_admin(user_id_login):
         jawaban = inquirer.prompt(menu)
         
         if not jawaban: 
+            loading("Kembali ke Halaman Masuk", 2)
             break
         opsi = jawaban
         
@@ -102,7 +103,7 @@ def menu_admin(user_id_login):
             
             menu_hapus = [
                 inquirer.List('target',
-                              message="Pilih user yang akan DIHAPUS PERMANEN:",
+                              message="Pilih user yang akan DIHAPUS PERMANEN",
                               choices=choices_hapus)
             ]
             ans_hapus = inquirer.prompt(menu_hapus)
