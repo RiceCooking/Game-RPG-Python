@@ -4,6 +4,7 @@ import os
 import sys
 import inquirer
 
+# Database setup - dipindah ke atas sebelum import modul lain
 DB_PATH = 'data/rpg_game_db.json' 
 db = TinyDB(DB_PATH)
 users = db.table('users')
@@ -18,23 +19,17 @@ def halaman_masuk():
     while True:
         try:
             questions = [
-            inquirer.List('opsi',
-                          message = "=== Halaman masuk ===",
-                          choices=[
-                              'Register',
-                              'Login',  
-                              'Keluar',
-                              ]),
-        ]
+                inquirer.List('opsi',
+                              message = "=== Halaman masuk ===",
+                              choices=['Register', 'Login', 'Keluar']),
+            ]
             answer = inquirer.prompt(questions)
-
-
-            if not answer:
+            
+            if not answer: 
                 raise KeyboardInterrupt
-
+            
             jawaban = answer
             break
-
         except (KeyboardInterrupt, EOFError):
             loading("Pilihlah berdasarkan opsi", 2)
             clear()
@@ -44,16 +39,35 @@ def halaman_masuk():
     if opsi == 'Register':
         clear()
         register()
-        return None
+        return None # Kode untuk "Ulangi Loop"
 
     elif opsi == 'Login':
         clear()
-        return login()
+        return login() # Mengembalikan Data User atau None
 
     elif opsi == 'Keluar':
         clear()
-        loading("Keluar dari Program", 3)
-        return False
+        loading("Keluar dari program", 2)
+        return False # Kode untuk "Matikan Program"
+
+# set up akun admin
+if not users.search(q.username == 'admin'):
+    print("Mendeteksi belum ada admin... Membuat akun admin default.")
+    admin_id = users.insert({
+        'username': 'admin',
+        'password': '123'
+    })
+    
+    players.insert({
+        'user_id': admin_id,
+        'role': 'admin',
+        'karakter': 'Administrator',
+        'class': 'GM',
+        'level': 999,
+        'koin': 999999,
+        'inventory': [],
+        'senjata_aktif': None
+    })
 
 def loading(text="Loading", durasi=5):
     print(text, end="")
@@ -62,7 +76,6 @@ def loading(text="Loading", durasi=5):
         sys.stdout.write(".")
         sys.stdout.flush()
     print(" Selesai")
-
 
 def clear():
     os.system("cls || clear")
@@ -164,4 +177,3 @@ def login():
         print("Bearlih ke halaman masuk")
         time.sleep(2)
         return None
-    
